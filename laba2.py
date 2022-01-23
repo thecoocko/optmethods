@@ -4,23 +4,18 @@ import time
 
 
 EPS = 0.0001
-
-def timing():
-    start_time = time.time()
-    return lambda x: print("[{:.2f}s] {}".format(time.time() - start_time, x))
-
+ 
 def f(x):
-
     return math.pow(x,3)/3+2*(math.exp(-x)-math.pow(x,2)+2*x)
 
 def halfDivisionMethod(a,b):
-
+    start_time = time.time()
     while (b-a) >= 2*EPS:
         x = (a + b) / 2
         y1, y2 = x - EPS/2, x + EPS/2
         f1, f2  = f(y1), f(y2)
         a, b = (y1,b) if f1 > f2 else (a,y2)
-    return f"bisection method: {f((a + b) / 2)}"
+    return "--- %s seconds ---" % (time.time() - start_time)+ f"\nbisection method: {f((a + b) / 2)}"
 
 def fibonacciNumbers(n):
     #recursive
@@ -37,7 +32,7 @@ def fibonacciNumbers(n):
     return fibonacciSeries
 
 def fibonacciMethod(a,b,h = 0.1):
-
+    start_time = time.time()
     n = int((b-a)/h)
     fib = fibonacciNumbers(n)
     while n !=1 :
@@ -52,11 +47,11 @@ def fibonacciMethod(a,b,h = 0.1):
             a = x1
             x1 = x2
             x2 = b - (x1 - a)
-    return f"fibonacci method: {min(f(x1),f(x2))}" 
+    return "--- %s seconds ---" % (time.time() - start_time)+ f"\nfibonacci method: {min(f(x1),f(x2))}" 
 
 
 def goldenSectionMethod(a,b):
-
+    start_time = time.time()
     while (b-a)>EPS:
         y1 = b - 0.618*(b - a)
         y2 = a + 0.618*(b - a)
@@ -69,7 +64,7 @@ def goldenSectionMethod(a,b):
             y1 = y2
             y2  = a + 0.618*(b - a)
 
-    return f"golden section method: {f((y1 + y2)/2.0)}"
+    return "--- %s seconds ---" % (time.time() - start_time)+ f"\ngolden section method: {f((y1 + y2)/2.0)}"
 
 
 if __name__=='__main__':
