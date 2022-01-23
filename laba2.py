@@ -1,8 +1,13 @@
 #методами половинного деления, золотого сечения, Фибоначчи
 import math
+import time
 
 
 EPS = 0.0001
+
+def timing():
+    start_time = time.time()
+    return lambda x: print("[{:.2f}s] {}".format(time.time() - start_time, x))
 
 def f(x):
 
